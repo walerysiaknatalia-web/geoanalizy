@@ -3,20 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Geoanalizy — analizy przestrzenne i opracowania danych przestrzennych</title>
-  <meta name="description" content="Analizy przestrzenne, mapy tematyczne, opracowania kartograficzne i przetwarzanie danych przestrzennych dla projektów uczelnianych, środowiskowych, planistycznych, technicznych i badawczych." />
+  <title>Geoanalizy — opracowania danych przestrzennych i mapy tematyczne</title>
+  <meta name="description" content="Profesjonalne opracowania danych przestrzennych, mapy tematyczne, analizy przestrzenne i materiały kartograficzne dla dokumentacji środowiskowych, geodezyjnych, planistycznych, technicznych i naukowych." />
+
   <style>
     :root {
-      --bg: #0b1f14;
-      --bg-2: #10291b;
-      --card: #143521;
-      --card-2: #183f29;
-      --accent: #a8c686;
-      --accent-2: #d6e7c2;
-      --text: #f4f7f1;
-      --muted: #c7d7bd;
-      --line: rgba(244, 247, 241, 0.14);
-      --shadow: rgba(0, 0, 0, 0.24);
+      --bg: #07130d;
+      --bg-2: #0b1c13;
+      --surface: rgba(15, 38, 25, 0.82);
+      --surface-strong: #102a1b;
+      --surface-light: rgba(255, 255, 255, 0.045);
+      --line: rgba(229, 239, 222, 0.14);
+      --line-strong: rgba(229, 239, 222, 0.22);
+      --text: #f5f7f1;
+      --muted: #c5d0bd;
+      --muted-2: #95a78e;
+      --accent: #b7d89a;
+      --accent-2: #e1f0d2;
+      --gold: #d6b86d;
+      --deep: #07130d;
+      --shadow: rgba(0, 0, 0, 0.34);
+      --radius-xl: 34px;
+      --radius-lg: 26px;
+      --radius-md: 18px;
+      --max: 1180px;
     }
 
     * {
@@ -29,13 +39,26 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 16% 8%, rgba(168, 198, 134, 0.16), transparent 28%),
-        radial-gradient(circle at 88% 18%, rgba(80, 128, 83, 0.18), transparent 30%),
-        linear-gradient(135deg, var(--bg), #07150d 70%);
+      font-family: Inter, "Segoe UI", Arial, Helvetica, sans-serif;
       color: var(--text);
-      line-height: 1.65;
+      background:
+        radial-gradient(circle at 8% 6%, rgba(183, 216, 154, 0.16), transparent 31%),
+        radial-gradient(circle at 88% 12%, rgba(90, 139, 88, 0.17), transparent 34%),
+        linear-gradient(135deg, #0a1d13 0%, var(--bg) 68%);
+      line-height: 1.62;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.12;
+      background-image:
+        linear-gradient(rgba(225, 240, 210, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(225, 240, 210, 0.09) 1px, transparent 1px);
+      background-size: 54px 54px;
+      mask-image: linear-gradient(to bottom, black, transparent 74%);
     }
 
     a {
@@ -43,107 +66,132 @@
     }
 
     .container {
-      width: min(1120px, calc(100% - 40px));
+      width: min(var(--max), calc(100% - 42px));
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
     header {
       position: sticky;
       top: 0;
-      z-index: 10;
-      backdrop-filter: blur(12px);
-      background: rgba(11, 31, 20, 0.82);
+      z-index: 20;
+      background: rgba(7, 19, 13, 0.78);
+      backdrop-filter: blur(18px);
       border-bottom: 1px solid var(--line);
     }
 
     .nav {
+      min-height: 76px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 20px 0;
-      gap: 18px;
+      justify-content: space-between;
+      gap: 22px;
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      font-weight: 800;
-      letter-spacing: 0.4px;
-      font-size: 22px;
+      gap: 13px;
+      text-decoration: none;
+      font-weight: 760;
+      letter-spacing: 0.2px;
       color: var(--accent-2);
+      font-size: 22px;
     }
 
     .brand-mark {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
       background:
-        linear-gradient(135deg, rgba(168, 198, 134, 0.95), rgba(61, 112, 73, 0.95));
-      box-shadow: 0 10px 24px var(--shadow);
-      position: relative;
+        linear-gradient(135deg, rgba(225, 240, 210, 0.96), rgba(132, 177, 113, 0.94) 52%, rgba(42, 105, 62, 0.96));
+      box-shadow: 0 14px 34px rgba(183, 216, 154, 0.16);
     }
 
-    .brand-mark::before,
-    .brand-mark::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      border: 1px solid rgba(11, 31, 20, 0.42);
-    }
-
-    .brand-mark::before {
-      inset: 8px 5px;
-      transform: rotate(28deg);
-    }
-
-    .brand-mark::after {
-      inset: 5px 11px;
-      transform: rotate(-18deg);
+    .brand-mark svg {
+      width: 24px;
+      height: 24px;
     }
 
     .nav-links {
       display: flex;
-      gap: 22px;
       align-items: center;
+      gap: 24px;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
     .nav-links a {
       text-decoration: none;
+      transition: color 0.18s ease;
     }
 
     .nav-links a:hover {
       color: var(--accent-2);
     }
 
+    .nav-contact {
+      padding: 10px 15px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      color: var(--accent-2);
+      background: rgba(255, 255, 255, 0.035);
+    }
+
     .hero {
-      padding: 98px 0 76px;
+      padding: 92px 0 84px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.88fr);
+      gap: 54px;
+      align-items: center;
     }
 
     .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
       color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 740;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      font-size: 13px;
-      margin-bottom: 20px;
+      font-size: 12px;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.8;
     }
 
     h1 {
       margin: 0;
-      max-width: 920px;
-      font-size: clamp(38px, 6.4vw, 78px);
+      max-width: 850px;
+      font-size: clamp(42px, 6.3vw, 76px);
       line-height: 1.02;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.052em;
+      font-weight: 780;
     }
 
     .lead {
-      max-width: 800px;
-      margin: 28px 0 34px;
+      max-width: 760px;
+      margin: 28px 0 0;
       color: var(--muted);
-      font-size: clamp(18px, 2vw, 22px);
+      font-size: clamp(18px, 1.85vw, 21px);
+    }
+
+    .lead strong {
+      color: var(--accent-2);
+      font-weight: 650;
     }
 
     .hero-actions {
@@ -151,53 +199,166 @@
       flex-wrap: wrap;
       gap: 14px;
       align-items: center;
-      margin-top: 30px;
+      margin-top: 34px;
     }
 
     .button {
       display: inline-flex;
-      justify-content: center;
       align-items: center;
-      padding: 14px 22px;
+      justify-content: center;
+      min-height: 48px;
+      padding: 14px 21px;
       border-radius: 999px;
       background: var(--accent);
-      color: #0b1f14;
+      color: #07130d;
       text-decoration: none;
-      font-weight: 800;
-      box-shadow: 0 12px 28px rgba(168, 198, 134, 0.18);
+      font-weight: 760;
+      box-shadow: 0 18px 44px rgba(183, 216, 154, 0.16);
     }
 
     .button.secondary {
       background: transparent;
       color: var(--accent-2);
-      border: 1px solid var(--line);
+      border: 1px solid var(--line-strong);
       box-shadow: none;
     }
 
+    .trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .trust {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .trust::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 18px rgba(183, 216, 154, 0.6);
+    }
+
+    .visual {
+      position: relative;
+      min-height: 490px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 75% 20%, rgba(183, 216, 154, 0.18), transparent 34%),
+        linear-gradient(180deg, rgba(20, 56, 35, 0.88), rgba(7, 19, 13, 0.96));
+      box-shadow: 0 34px 90px rgba(0, 0, 0, 0.38);
+      overflow: hidden;
+    }
+
+    .visual svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .visual-panel {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 18px;
+      background: rgba(7, 19, 13, 0.72);
+      backdrop-filter: blur(16px);
+      display: grid;
+      gap: 13px;
+    }
+
+    .panel-title {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--accent-2);
+      font-weight: 720;
+      letter-spacing: -0.02em;
+    }
+
+    .panel-title span:last-child {
+      color: var(--muted-2);
+      font-weight: 500;
+    }
+
+    .layer {
+      display: grid;
+      grid-template-columns: 110px 1fr 56px;
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      overflow: hidden;
+    }
+
+    .bar i {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--accent), rgba(225, 240, 210, 0.76));
+    }
+
     .section {
-      padding: 70px 0;
+      padding: 78px 0;
       border-top: 1px solid var(--line);
     }
 
+    .section-header {
+      display: grid;
+      grid-template-columns: minmax(0, 0.76fr) minmax(310px, 0.48fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 30px;
+    }
+
     h2 {
-      font-size: clamp(28px, 4vw, 42px);
-      line-height: 1.15;
-      margin: 0 0 18px;
-      letter-spacing: -0.025em;
+      margin: 0;
+      font-size: clamp(31px, 4.1vw, 48px);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+      font-weight: 760;
     }
 
     .section-intro {
-      max-width: 780px;
+      margin: 0;
       color: var(--muted);
-      font-size: 18px;
-      margin: 0 0 30px;
+      font-size: 17px;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-top: 28px;
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid.four {
+      grid-template-columns: repeat(4, 1fr);
     }
 
     .grid.two {
@@ -205,34 +366,225 @@
     }
 
     .card {
-      background: linear-gradient(180deg, rgba(20, 53, 33, 0.94), rgba(16, 41, 27, 0.96));
+      position: relative;
       border: 1px solid var(--line);
-      border-radius: 24px;
+      border-radius: var(--radius-lg);
+      background:
+        linear-gradient(180deg, rgba(18, 48, 31, 0.86), rgba(12, 32, 21, 0.92));
       padding: 26px;
-      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+      overflow: hidden;
+      box-shadow: 0 18px 46px rgba(0, 0, 0, 0.16);
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      right: -50px;
+      top: -50px;
+      width: 150px;
+      height: 150px;
+      border-radius: 999px;
+      background: rgba(183, 216, 154, 0.07);
+    }
+
+    .card > * {
+      position: relative;
+      z-index: 1;
     }
 
     .card h3 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       color: var(--accent-2);
-      font-size: 22px;
+      font-size: 21px;
+      letter-spacing: -0.02em;
     }
 
-    .card p,
-    .card li {
+    .card p {
+      margin: 0;
       color: var(--muted);
     }
 
-    ul {
+    .icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      border-radius: 15px;
+      color: var(--accent);
+      background: rgba(183, 216, 154, 0.10);
+      border: 1px solid var(--line);
+    }
+
+    .icon svg {
+      width: 23px;
+      height: 23px;
+    }
+
+    .scope {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .scope-list {
+      display: grid;
+      gap: 11px;
+    }
+
+    .scope-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .scope-item strong {
+      display: block;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .scope-item span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .matrix {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: rgba(7, 19, 13, 0.34);
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 0.48fr 1fr;
+      border-top: 1px solid var(--line);
+    }
+
+    .matrix-row:first-child {
+      border-top: none;
+    }
+
+    .matrix-row div {
+      padding: 18px 20px;
+    }
+
+    .matrix-row div:first-child {
+      color: var(--accent-2);
+      background: rgba(183, 216, 154, 0.055);
+      font-weight: 700;
+    }
+
+    .matrix-row div:last-child {
+      color: var(--muted);
+    }
+
+    .domain-card {
+      min-height: 250px;
+    }
+
+    .tag {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      margin-bottom: 15px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #07130d;
+      background: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-size: 11px;
+      font-weight: 820;
+    }
+
+    .deliverables {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      background:
+        radial-gradient(circle at 90% 20%, rgba(183, 216, 154, 0.12), transparent 28%),
+        linear-gradient(180deg, rgba(18, 48, 31, 0.90), rgba(7, 19, 13, 0.96));
+      padding: 32px;
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 30px;
+      align-items: start;
+      box-shadow: 0 24px 66px rgba(0, 0, 0, 0.2);
+    }
+
+    .deliverables h3 {
+      margin: 0 0 14px;
+      font-size: 30px;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--accent-2);
+    }
+
+    .deliverables p {
       margin: 0;
-      padding-left: 18px;
+      color: var(--muted);
     }
 
-    li {
-      margin-bottom: 9px;
+    .deliverable-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-    .pill-list {
+    .deliverable {
+      padding: 15px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--muted);
+    }
+
+    .deliverable strong {
+      display: block;
+      color: var(--accent-2);
+      margin-bottom: 4px;
+    }
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      counter-reset: step;
+    }
+
+    .step {
+      padding: 25px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      background: rgba(16, 42, 27, 0.72);
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      display: block;
+      color: var(--accent);
+      font-weight: 820;
+      margin-bottom: 18px;
+      letter-spacing: 0.08em;
+    }
+
+    .step h3 {
+      margin: 0 0 9px;
+      color: var(--accent-2);
+      font-size: 21px;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .formats {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
@@ -240,64 +592,71 @@
     }
 
     .pill {
-      border: 1px solid var(--line);
-      background: rgba(24, 63, 41, 0.72);
-      color: var(--accent-2);
       padding: 9px 13px;
       border-radius: 999px;
-      font-size: 14px;
-    }
-
-    .process {
-      counter-reset: step;
-    }
-
-    .process .card {
-      position: relative;
-      padding-top: 58px;
-    }
-
-    .process .card::before {
-      counter-increment: step;
-      content: "0" counter(step);
-      position: absolute;
-      top: 22px;
-      left: 26px;
-      color: var(--accent);
-      font-weight: 800;
-      letter-spacing: 0.08em;
-    }
-
-    .contact-box {
-      background:
-        linear-gradient(135deg, rgba(168, 198, 134, 0.14), transparent 36%),
-        linear-gradient(180deg, var(--card-2), var(--bg-2));
       border: 1px solid var(--line);
-      border-radius: 30px;
-      padding: 34px;
-      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.20);
+      background: rgba(255, 255, 255, 0.035);
+      color: var(--accent-2);
+      font-size: 13px;
+    }
+
+    .contact {
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: 38px;
+      background:
+        radial-gradient(circle at 86% 14%, rgba(183, 216, 154, 0.16), transparent 30%),
+        linear-gradient(180deg, rgba(24, 61, 39, 0.94), rgba(7, 19, 13, 0.98));
+      box-shadow: 0 26px 76px rgba(0, 0, 0, 0.25);
+    }
+
+    .contact p {
+      max-width: 800px;
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 22px;
     }
 
     .email {
       display: inline-block;
-      margin-top: 14px;
-      font-size: clamp(22px, 3vw, 34px);
+      font-size: clamp(25px, 3.1vw, 39px);
       color: var(--accent);
       text-decoration: none;
-      font-weight: 800;
+      font-weight: 820;
+      letter-spacing: -0.03em;
       word-break: break-word;
     }
 
     footer {
-      padding: 28px 0;
       border-top: 1px solid var(--line);
-      color: rgba(199, 215, 189, 0.82);
-      font-size: 14px;
+      padding: 30px 0;
+      color: rgba(197, 208, 189, 0.8);
+      font-size: 13px;
     }
 
-    @media (max-width: 880px) {
-      .nav {
-        align-items: flex-start;
+    @media (max-width: 1020px) {
+      .hero-grid,
+      .section-header,
+      .scope,
+      .deliverables {
+        grid-template-columns: 1fr;
+      }
+
+      .grid.three,
+      .grid.four,
+      .grid.two,
+      .process {
+        grid-template-columns: 1fr;
+      }
+
+      .deliverable-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 28px, var(--max));
       }
 
       .nav-links {
@@ -305,172 +664,344 @@
       }
 
       .hero {
-        padding: 70px 0 58px;
+        padding: 66px 0 58px;
       }
 
-      .grid,
-      .grid.two {
+      .section {
+        padding: 60px 0;
+      }
+
+      .visual {
+        min-height: 500px;
+      }
+
+      .layer {
         grid-template-columns: 1fr;
+        gap: 6px;
       }
 
-      .container {
-        width: min(100% - 28px, 1120px);
+      .contact,
+      .deliverables,
+      .card,
+      .step {
+        padding: 23px;
       }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="container nav">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true"></span>
+      <a class="brand" href="#top" aria-label="Geoanalizy">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M4.5 7.2 9.4 4.8l5.2 2.4 4.9-2.1v11.7l-4.9 2.4-5.2-2.4-4.9 2.1V7.2Z" stroke="#07130d" stroke-width="1.7" stroke-linejoin="round"/>
+            <path d="M9.4 4.8v12M14.6 7.2v12" stroke="#07130d" stroke-width="1.45"/>
+          </svg>
+        </span>
         <span>Geoanalizy</span>
-      </div>
+      </a>
+
       <nav class="nav-links" aria-label="Nawigacja">
-        <a href="#zakres">Zakres usług</a>
-        <a href="#dla-kogo">Dla kogo</a>
-        <a href="#kontakt">Kontakt</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#sektory">Sektory</a>
+        <a href="#wyniki">Wyniki</a>
+        <a href="#kontakt" class="nav-contact">Kontakt</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
-      <div class="container">
-        <div class="eyebrow">Dane przestrzenne • mapy • opracowania</div>
-        <h1>Analizy przestrzenne i opracowania danych przestrzennych</h1>
-        <p class="lead">
-          Mapy tematyczne, warstwy danych, zestawienia przestrzenne i opracowania kartograficzne —
-          od prostych projektów uczelnianych po rozbudowane analizy dla dokumentacji środowiskowych,
-          planistycznych, technicznych i badawczych.
-        </p>
-        <div class="hero-actions">
-          <a class="button" href="mailto:kontakt@geoanalizy.pl">Napisz w sprawie zlecenia</a>
-          <a class="button secondary" href="#zakres">Zobacz zakres usług</a>
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Opracowania przestrzenne</div>
+          <h1>Dane przestrzenne w czytelnej, uporządkowanej i użytecznej formie</h1>
+          <p class="lead">
+            <strong>Geoanalizy</strong> to opracowania danych przestrzennych, mapy tematyczne
+            i analizy przestrzenne dla dokumentacji środowiskowych, geodezyjnych, planistycznych,
+            technicznych oraz naukowych. Zakres pracy może obejmować pojedynczą mapę,
+            uporządkowanie danych albo kompletne opracowanie z warstwami wynikowymi.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button" href="mailto:kontakt@geoanalizy.pl">Omów zakres opracowania</a>
+            <a class="button secondary" href="#uslugi">Zakres usług</a>
+          </div>
+
+          <div class="trust-row" aria-label="Najważniejsze cechy usług">
+            <span class="trust">szybka realizacja</span>
+            <span class="trust">czytelne mapy</span>
+            <span class="trust">uporządkowane dane</span>
+            <span class="trust">formaty GIS</span>
+          </div>
+        </div>
+
+        <div class="visual" aria-label="Ilustracja danych przestrzennych">
+          <svg viewBox="0 0 640 560" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="stroke" x1="0" x2="1">
+                <stop offset="0" stop-color="#e1f0d2" stop-opacity="0.12"/>
+                <stop offset="1" stop-color="#b7d89a" stop-opacity="0.58"/>
+              </linearGradient>
+              <filter id="softGlow">
+                <feGaussianBlur stdDeviation="3.5" result="blur"/>
+                <feMerge>
+                  <feMergeNode in="blur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
+            </defs>
+
+            <path d="M-40 120 C70 44 160 184 270 105 S470 26 690 145" fill="none" stroke="url(#stroke)" stroke-width="2"/>
+            <path d="M-40 190 C86 105 170 245 310 168 S500 88 690 220" fill="none" stroke="#e1f0d2" stroke-opacity="0.13" stroke-width="2"/>
+            <path d="M-40 270 C112 178 216 330 350 240 S545 160 690 315" fill="none" stroke="#e1f0d2" stroke-opacity="0.13" stroke-width="2"/>
+            <path d="M-40 360 C135 250 246 435 410 325 S565 250 690 395" fill="none" stroke="#e1f0d2" stroke-opacity="0.13" stroke-width="2"/>
+
+            <path d="M66 84 213 34 354 112 188 174Z" fill="#b7d89a" fill-opacity="0.055" stroke="#e1f0d2" stroke-opacity="0.14"/>
+            <path d="M278 132 448 64 596 154 418 232Z" fill="#b7d89a" fill-opacity="0.070" stroke="#e1f0d2" stroke-opacity="0.16"/>
+            <path d="M95 246 282 160 454 252 244 348Z" fill="#b7d89a" fill-opacity="0.075" stroke="#e1f0d2" stroke-opacity="0.16"/>
+            <path d="M360 332 525 255 686 346 504 445Z" fill="#b7d89a" fill-opacity="0.055" stroke="#e1f0d2" stroke-opacity="0.13"/>
+            <path d="M-30 380 140 292 310 386 124 488Z" fill="#b7d89a" fill-opacity="0.060" stroke="#e1f0d2" stroke-opacity="0.13"/>
+
+            <circle cx="178" cy="244" r="8" fill="#b7d89a" filter="url(#softGlow)"/>
+            <circle cx="310" cy="168" r="7" fill="#e1f0d2" filter="url(#softGlow)"/>
+            <circle cx="438" cy="252" r="8" fill="#b7d89a" filter="url(#softGlow)"/>
+            <circle cx="374" cy="372" r="6" fill="#e1f0d2" filter="url(#softGlow)"/>
+            <circle cx="122" cy="392" r="7" fill="#b7d89a" filter="url(#softGlow)"/>
+
+            <path d="M122 392 178 244 310 168 438 252 374 372 122 392Z" fill="none" stroke="#b7d89a" stroke-opacity="0.44" stroke-width="2.3" stroke-dasharray="9 8"/>
+            <path d="M178 244 374 372M310 168 374 372M438 252 122 392" fill="none" stroke="#e1f0d2" stroke-opacity="0.15" stroke-width="1.5"/>
+
+            <rect x="365" y="54" width="220" height="116" rx="20" fill="#07130d" fill-opacity="0.64" stroke="#e1f0d2" stroke-opacity="0.16"/>
+            <text x="390" y="91" fill="#e1f0d2" font-size="19" font-weight="700">Analiza warstw</text>
+            <text x="390" y="122" fill="#c5d0bd" font-size="13">bufory • przecięcia • eksport</text>
+            <rect x="390" y="139" width="82" height="8" rx="4" fill="#b7d89a" fill-opacity="0.82"/>
+            <rect x="482" y="139" width="50" height="8" rx="4" fill="#e1f0d2" fill-opacity="0.24"/>
+          </svg>
+
+          <div class="visual-panel">
+            <div class="panel-title">
+              <span>Przykładowy pakiet wynikowy</span>
+              <span>GIS / PDF</span>
+            </div>
+            <div class="layer">
+              <span>Warstwy danych</span>
+              <div class="bar"><i style="width: 92%"></i></div>
+              <span>SHP/GPKG</span>
+            </div>
+            <div class="layer">
+              <span>Zestawienia</span>
+              <div class="bar"><i style="width: 76%"></i></div>
+              <span>CSV/XLSX</span>
+            </div>
+            <div class="layer">
+              <span>Mapy wynikowe</span>
+              <div class="bar"><i style="width: 84%"></i></div>
+              <span>PDF/PNG</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="zakres">
+    <section class="section" id="uslugi">
       <div class="container">
-        <h2>Zakres usług</h2>
-        <p class="section-intro">
-          Realizowane są zarówno niewielkie, pilne zlecenia, jak i większe prace wymagające
-          uporządkowania danych, analizy przestrzennej, przygotowania warstw oraz czytelnej
-          wizualizacji wyników.
-        </p>
+        <div class="section-header">
+          <h2>Zakres opracowań</h2>
+          <p class="section-intro">
+            Usługi obejmują techniczne przygotowanie danych, analizę przestrzenną oraz opracowanie
+            materiałów mapowych. Zakres może zostać dopasowany do etapu projektu i dostępnych danych.
+          </p>
+        </div>
 
-        <div class="grid">
+        <div class="grid three">
           <article class="card">
-            <h3>Mapy i opracowania</h3>
-            <ul>
-              <li>mapy tematyczne do raportów, publikacji i dokumentacji,</li>
-              <li>opracowania kartograficzne w formacie PDF,</li>
-              <li>wizualizacja wyników analiz przestrzennych,</li>
-              <li>mapy do projektów uczelnianych i prac dyplomowych.</li>
-            </ul>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M4.5 7 9 4.7l6 2.6 4.5-2v11.5L15 19.3l-6-2.6-4.5 2V7Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M9 4.7v12M15 7.3v12" stroke="currentColor" stroke-width="1.45"/>
+              </svg>
+            </div>
+            <h3>Opracowania mapowe</h3>
+            <p>Mapy tematyczne, plansze, załączniki kartograficzne i wizualizacje danych do raportów, prezentacji, publikacji oraz dokumentacji.</p>
           </article>
 
           <article class="card">
-            <h3>Dane przestrzenne</h3>
-            <ul>
-              <li>porządkowanie warstw SHP, GPKG, GeoJSON i CSV,</li>
-              <li>wektoryzacja i georeferencja danych,</li>
-              <li>kontrola geometrii oraz tabel atrybutów,</li>
-              <li>przygotowanie danych do QGIS, ArcGIS i dalszych analiz.</li>
-            </ul>
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M5 6h14M5 12h14M5 18h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+                <path d="M8 4v16M16 4v16" stroke="currentColor" stroke-width="1.4" stroke-opacity="0.7"/>
+              </svg>
+            </div>
+            <h3>Przetwarzanie danych</h3>
+            <p>Porządkowanie warstw, kontrola geometrii i atrybutów, ujednolicanie formatów, eksporty oraz przygotowanie danych do dalszej pracy.</p>
           </article>
 
           <article class="card">
+            <div class="icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="16" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M10.4 10.4 13.6 13.6M4 20l16-16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+              </svg>
+            </div>
             <h3>Analizy przestrzenne</h3>
-            <ul>
-              <li>analizy buforowe i odległościowe,</li>
-              <li>przecięcia, łączenie i selekcja warstw,</li>
-              <li>zestawienia przestrzenne i tabele wynikowe,</li>
-              <li>raporty mapowe dla dokumentacji i prezentacji.</li>
-            </ul>
+            <p>Bufory, przecięcia warstw, selekcje przestrzenne, analizy odległościowe, zestawienia powierzchniowe i relacje między obiektami.</p>
           </article>
         </div>
 
-        <div class="pill-list" aria-label="Formaty i narzędzia">
-          <span class="pill">QGIS</span>
-          <span class="pill">ArcGIS</span>
-          <span class="pill">SHP</span>
-          <span class="pill">GPKG</span>
-          <span class="pill">GeoJSON</span>
-          <span class="pill">CSV</span>
-          <span class="pill">PDF</span>
-          <span class="pill">Python</span>
+        <div class="scope">
+          <div class="scope-list">
+            <div class="scope-item">
+              <strong>Wektoryzacja i georeferencja</strong>
+              <span>Przeniesienie informacji z map, rastrów, szkiców lub plików PDF do postaci danych przestrzennych.</span>
+            </div>
+            <div class="scope-item">
+              <strong>Walidacja i organizacja danych</strong>
+              <span>Sprawdzenie poprawności geometrii, atrybutów, układów współrzędnych, spójności i kompletności warstw.</span>
+            </div>
+            <div class="scope-item">
+              <strong>Raportowanie wyników</strong>
+              <span>Mapy, tabele, zestawienia i krótki opis metodyki w formie gotowej do włączenia do dokumentacji.</span>
+            </div>
+          </div>
+
+          <div class="matrix" aria-label="Przykładowe efekty prac">
+            <div class="matrix-row">
+              <div>Dane wejściowe</div>
+              <div>mapy rastrowe, warstwy SHP/GPKG, dane tabelaryczne, współrzędne, pomiary, materiały archiwalne</div>
+            </div>
+            <div class="matrix-row">
+              <div>Prace</div>
+              <div>czyszczenie danych, transformacje, selekcje, analizy przestrzenne, kompozycje mapowe, eksporty</div>
+            </div>
+            <div class="matrix-row">
+              <div>Wynik</div>
+              <div>mapy PDF/PNG, warstwy wynikowe, tabele CSV/XLSX, zestawienia, krótki raport metodyczny</div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section" id="dla-kogo">
+    <section class="section" id="sektory">
       <div class="container">
-        <h2>Dla kogo?</h2>
-        <p class="section-intro">
-          Usługi kierowane są do osób i zespołów, które potrzebują uporządkowanych danych
-          przestrzennych, czytelnych map i sprawnej realizacji opracowań.
-        </p>
+        <div class="section-header">
+          <h2>Zastosowania branżowe</h2>
+          <p class="section-intro">
+            Opracowania mogą wspierać różne typy dokumentacji i analiz, w których istotne są lokalizacja,
+            relacje przestrzenne, zasięgi, odległości, powierzchnie i czytelne przedstawienie danych.
+          </p>
+        </div>
 
-        <div class="grid two">
-          <article class="card">
-            <h3>Małe i pilne zlecenia</h3>
-            <p>
-              Projekty uczelniane, prace dyplomowe, pojedyncze mapy do raportów, szybkie zestawienia
-              przestrzenne, porządkowanie danych oraz przygotowanie materiałów do prezentacji.
-            </p>
+        <div class="grid four">
+          <article class="card domain-card">
+            <span class="tag">Środowisko</span>
+            <h3>Uwarunkowania przyrodnicze i terenowe</h3>
+            <p>Mapy i zestawienia dotyczące pokrycia terenu, obszarów chronionych, hydrologii, zieleni, stref buforowych i dokumentacji środowiskowych.</p>
           </article>
 
-          <article class="card">
-            <h3>Większe opracowania</h3>
-            <p>
-              Wsparcie dla firm środowiskowych, biur projektowych, jednostek samorządowych, geodetów
-              i zespołów badawczych przy dokumentacjach wymagających danych przestrzennych.
-            </p>
+          <article class="card domain-card">
+            <span class="tag">Geodezja</span>
+            <h3>Dane pomiarowe i opracowania mapowe</h3>
+            <p>Porządkowanie danych przestrzennych, praca na układach współrzędnych, przygotowanie warstw, szkiców i materiałów pomocniczych.</p>
           </article>
+
+          <article class="card domain-card">
+            <span class="tag">Planowanie</span>
+            <h3>Analizy lokalizacyjne i przestrzenne</h3>
+            <p>Analizy działek, zasięgów, sąsiedztwa obiektów, odległości, ograniczeń przestrzennych i materiałów do opracowań planistycznych.</p>
+          </article>
+
+          <article class="card domain-card">
+            <span class="tag">Nauka</span>
+            <h3>Publikacje, projekty i materiały akademickie</h3>
+            <p>Mapy i wizualizacje do artykułów, posterów, prezentacji, prac dyplomowych, projektów badawczych i analiz danych źródłowych.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="wyniki">
+      <div class="container">
+        <div class="deliverables">
+          <div>
+            <h3>Efektem pracy są konkretne materiały, nie tylko „plik z mapą”</h3>
+            <p>
+              Wyniki mogą zostać przygotowane w formie gotowej do włączenia do raportu,
+              dokumentacji, prezentacji albo dalszej pracy w oprogramowaniu GIS.
+            </p>
+            <div class="formats" aria-label="Formaty i narzędzia">
+              <span class="pill">QGIS</span>
+              <span class="pill">ArcGIS</span>
+              <span class="pill">Python</span>
+              <span class="pill">SHP</span>
+              <span class="pill">GPKG</span>
+              <span class="pill">GeoJSON</span>
+              <span class="pill">GeoTIFF</span>
+              <span class="pill">CSV / XLSX</span>
+              <span class="pill">PDF / PNG</span>
+            </div>
+          </div>
+
+          <div class="deliverable-grid">
+            <div class="deliverable">
+              <strong>Mapy wynikowe</strong>
+              plansze, kompozycje, załączniki kartograficzne
+            </div>
+            <div class="deliverable">
+              <strong>Warstwy danych</strong>
+              pliki przestrzenne z uporządkowaną strukturą
+            </div>
+            <div class="deliverable">
+              <strong>Zestawienia</strong>
+              tabele, powierzchnie, odległości, liczności
+            </div>
+            <div class="deliverable">
+              <strong>Opis metodyczny</strong>
+              krótka informacja o danych, narzędziach i wyniku
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section">
       <div class="container">
-        <h2>Jak wygląda współpraca?</h2>
-        <div class="grid process">
-          <article class="card">
-            <h3>Opis zakresu</h3>
-            <p>
-              W wiadomości wystarczy opisać obszar opracowania, cel pracy, dostępne dane,
-              oczekiwany format wyniku i termin realizacji.
-            </p>
-          </article>
+        <div class="section-header">
+          <h2>Przebieg współpracy</h2>
+          <p class="section-intro">
+            Wystarczy krótko opisać cel opracowania i dostępne dane. Na tej podstawie można dobrać
+            zakres pracy, format wyników i termin realizacji.
+          </p>
+        </div>
 
-          <article class="card">
-            <h3>Wycena i termin</h3>
-            <p>
-              Zakres zostaje doprecyzowany, a następnie ustalany jest termin, format danych
-              wynikowych oraz sposób przekazania opracowania.
-            </p>
-          </article>
-
-          <article class="card">
-            <h3>Gotowe materiały</h3>
-            <p>
-              Wyniki mogą obejmować mapy PDF, warstwy danych, tabele, zestawienia przestrzenne
-              albo krótki raport mapowy.
-            </p>
-          </article>
+        <div class="process">
+          <div class="step">
+            <h3>Zakres i dane</h3>
+            <p>Określenie obszaru, celu opracowania, danych wejściowych, układu współrzędnych i oczekiwanego wyniku.</p>
+          </div>
+          <div class="step">
+            <h3>Wycena i realizacja</h3>
+            <p>Doprecyzowanie zakresu, terminu, formatu przekazania oraz wykonanie prac na danych przestrzennych.</p>
+          </div>
+          <div class="step">
+            <h3>Materiały wynikowe</h3>
+            <p>Przekazanie map, warstw, tabel, zestawień lub raportu w uzgodnionej formie.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <section class="section" id="kontakt">
       <div class="container">
-        <h2>Kontakt</h2>
-        <div class="contact-box">
-          <p class="section-intro">
-            W wiadomości warto wskazać zakres opracowania, lokalizację lub obszar, posiadane dane
-            wejściowe, oczekiwany format wyników oraz termin realizacji.
+        <div class="contact">
+          <h2>Kontakt</h2>
+          <p>
+            W wiadomości warto podać: cel opracowania, lokalizację lub obszar, dostępne dane,
+            oczekiwany format wyników oraz termin. Na tej podstawie można szybko ocenić zakres pracy.
           </p>
           <a class="email" href="mailto:kontakt@geoanalizy.pl">kontakt@geoanalizy.pl</a>
         </div>
@@ -480,7 +1011,7 @@
 
   <footer>
     <div class="container">
-      Geoanalizy — analizy przestrzenne, mapy tematyczne i opracowania danych przestrzennych.
+      © Geoanalizy
     </div>
   </footer>
 </body>
