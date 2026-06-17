@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geoanalizy — analizy przestrzenne i opracowania danych przestrzennych</title>
+  <meta name="description" content="Analizy przestrzenne, mapy tematyczne, opracowania kartograficzne i przetwarzanie danych przestrzennych dla projektów uczelnianych, środowiskowych, planistycznych, technicznych i badawczych." />
+  <style>
+    :root {
+      --bg: #0b1f14;
+      --bg-2: #10291b;
+      --card: #143521;
+      --card-2: #183f29;
+      --accent: #a8c686;
+      --accent-2: #d6e7c2;
+      --text: #f4f7f1;
+      --muted: #c7d7bd;
+      --line: rgba(244, 247, 241, 0.14);
+      --shadow: rgba(0, 0, 0, 0.24);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 16% 8%, rgba(168, 198, 134, 0.16), transparent 28%),
+        radial-gradient(circle at 88% 18%, rgba(80, 128, 83, 0.18), transparent 30%),
+        linear-gradient(135deg, var(--bg), #07150d 70%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(12px);
+      background: rgba(11, 31, 20, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      font-size: 22px;
+      color: var(--accent-2);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background:
+        linear-gradient(135deg, rgba(168, 198, 134, 0.95), rgba(61, 112, 73, 0.95));
+      box-shadow: 0 10px 24px var(--shadow);
+      position: relative;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      border: 1px solid rgba(11, 31, 20, 0.42);
+    }
+
+    .brand-mark::before {
+      inset: 8px 5px;
+      transform: rotate(28deg);
+    }
+
+    .brand-mark::after {
+      inset: 5px 11px;
+      transform: rotate(-18deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-2);
+    }
+
+    .hero {
+      padding: 98px 0 76px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(38px, 6.4vw, 78px);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+    }
+
+    .lead {
+      max-width: 800px;
+      margin: 28px 0 34px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 22px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #0b1f14;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 12px 28px rgba(168, 198, 134, 0.18);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-2);
+      border: 1px solid var(--line);
+      box-shadow: none;
+    }
+
+    .section {
+      padding: 70px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    h2 {
+      font-size: clamp(28px, 4vw, 42px);
+      line-height: 1.15;
+      margin: 0 0 18px;
+      letter-spacing: -0.025em;
+    }
+
+    .section-intro {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 18px;
+      margin: 0 0 30px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(20, 53, 33, 0.94), rgba(16, 41, 27, 0.96));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 26px;
+      box-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+    }
+
+    .card h3 {
+      margin: 0 0 12px;
+      color: var(--accent-2);
+      font-size: 22px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 9px;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .pill {
+      border: 1px solid var(--line);
+      background: rgba(24, 63, 41, 0.72);
+      color: var(--accent-2);
+      padding: 9px 13px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .process {
+      counter-reset: step;
+    }
+
+    .process .card {
+      position: relative;
+      padding-top: 58px;
+    }
+
+    .process .card::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      position: absolute;
+      top: 22px;
+      left: 26px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .contact-box {
+      background:
+        linear-gradient(135deg, rgba(168, 198, 134, 0.14), transparent 36%),
+        linear-gradient(180deg, var(--card-2), var(--bg-2));
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 34px;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, 0.20);
+    }
+
+    .email {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: clamp(22px, 3vw, 34px);
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--line);
+      color: rgba(199, 215, 189, 0.82);
+      font-size: 14px;
+    }
+
+    @media (max-width: 880px) {
+      .nav {
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 0 58px;
+      }
+
+      .grid,
+      .grid.two {
+        grid-template-columns: 1fr;
+      }
+
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>Geoanalizy</span>
+      </div>
+      <nav class="nav-links" aria-label="Nawigacja">
+        <a href="#zakres">Zakres usług</a>
+        <a href="#dla-kogo">Dla kogo</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow">Dane przestrzenne • mapy • opracowania</div>
+        <h1>Analizy przestrzenne i opracowania danych przestrzennych</h1>
+        <p class="lead">
+          Mapy tematyczne, warstwy danych, zestawienia przestrzenne i opracowania kartograficzne —
+          od prostych projektów uczelnianych po rozbudowane analizy dla dokumentacji środowiskowych,
+          planistycznych, technicznych i badawczych.
+        </p>
+        <div class="hero-actions">
+          <a class="button" href="mailto:kontakt@geoanalizy.pl">Napisz w sprawie zlecenia</a>
+          <a class="button secondary" href="#zakres">Zobacz zakres usług</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="zakres">
+      <div class="container">
+        <h2>Zakres usług</h2>
+        <p class="section-intro">
+          Realizowane są zarówno niewielkie, pilne zlecenia, jak i większe prace wymagające
+          uporządkowania danych, analizy przestrzennej, przygotowania warstw oraz czytelnej
+          wizualizacji wyników.
+        </p>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Mapy i opracowania</h3>
+            <ul>
+              <li>mapy tematyczne do raportów, publikacji i dokumentacji,</li>
+              <li>opracowania kartograficzne w formacie PDF,</li>
+              <li>wizualizacja wyników analiz przestrzennych,</li>
+              <li>mapy do projektów uczelnianych i prac dyplomowych.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Dane przestrzenne</h3>
+            <ul>
+              <li>porządkowanie warstw SHP, GPKG, GeoJSON i CSV,</li>
+              <li>wektoryzacja i georeferencja danych,</li>
+              <li>kontrola geometrii oraz tabel atrybutów,</li>
+              <li>przygotowanie danych do QGIS, ArcGIS i dalszych analiz.</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h3>Analizy przestrzenne</h3>
+            <ul>
+              <li>analizy buforowe i odległościowe,</li>
+              <li>przecięcia, łączenie i selekcja warstw,</li>
+              <li>zestawienia przestrzenne i tabele wynikowe,</li>
+              <li>raporty mapowe dla dokumentacji i prezentacji.</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="pill-list" aria-label="Formaty i narzędzia">
+          <span class="pill">QGIS</span>
+          <span class="pill">ArcGIS</span>
+          <span class="pill">SHP</span>
+          <span class="pill">GPKG</span>
+          <span class="pill">GeoJSON</span>
+          <span class="pill">CSV</span>
+          <span class="pill">PDF</span>
+          <span class="pill">Python</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="dla-kogo">
+      <div class="container">
+        <h2>Dla kogo?</h2>
+        <p class="section-intro">
+          Usługi kierowane są do osób i zespołów, które potrzebują uporządkowanych danych
+          przestrzennych, czytelnych map i sprawnej realizacji opracowań.
+        </p>
+
+        <div class="grid two">
+          <article class="card">
+            <h3>Małe i pilne zlecenia</h3>
+            <p>
+              Projekty uczelniane, prace dyplomowe, pojedyncze mapy do raportów, szybkie zestawienia
+              przestrzenne, porządkowanie danych oraz przygotowanie materiałów do prezentacji.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Większe opracowania</h3>
+            <p>
+              Wsparcie dla firm środowiskowych, biur projektowych, jednostek samorządowych, geodetów
+              i zespołów badawczych przy dokumentacjach wymagających danych przestrzennych.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Jak wygląda współpraca?</h2>
+        <div class="grid process">
+          <article class="card">
+            <h3>Opis zakresu</h3>
+            <p>
+              W wiadomości wystarczy opisać obszar opracowania, cel pracy, dostępne dane,
+              oczekiwany format wyniku i termin realizacji.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Wycena i termin</h3>
+            <p>
+              Zakres zostaje doprecyzowany, a następnie ustalany jest termin, format danych
+              wynikowych oraz sposób przekazania opracowania.
+            </p>
+          </article>
+
+          <article class="card">
+            <h3>Gotowe materiały</h3>
+            <p>
+              Wyniki mogą obejmować mapy PDF, warstwy danych, tabele, zestawienia przestrzenne
+              albo krótki raport mapowy.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="kontakt">
+      <div class="container">
+        <h2>Kontakt</h2>
+        <div class="contact-box">
+          <p class="section-intro">
+            W wiadomości warto wskazać zakres opracowania, lokalizację lub obszar, posiadane dane
+            wejściowe, oczekiwany format wyników oraz termin realizacji.
+          </p>
+          <a class="email" href="mailto:kontakt@geoanalizy.pl">kontakt@geoanalizy.pl</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Geoanalizy — analizy przestrzenne, mapy tematyczne i opracowania danych przestrzennych.
+    </div>
+  </footer>
+</body>
+</html>
